@@ -12,6 +12,7 @@ import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.validation.FieldError;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -82,12 +83,21 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(body);
     }
 
+    @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
+    public ResponseEntity<ApiError> handleMethodNotSupported(HttpRequestMethodNotSupportedException ex) {
+        String message = ex.getMessage() != null ? ex.getMessage() : "Method not allowed";
+        ApiError body = new ApiError(HttpStatus.METHOD_NOT_ALLOWED.value(), message);
+        return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).body(body);
+    }
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiError> handleGeneric(Exception ex) {
         log.error("Unhandled exception", ex);
-        ApiError body = new ApiError(
-                HttpStatus.INTERNAL_SERVER_ERROR.value(),
-                "An unexpected error occurred");
+        String detail = ex.getMessage();
+        String message = detail != null && !detail.isBlank()
+                ? "An unexpected error occurred: " + detail
+                : "An unexpected error occurred";
+        ApiError body = new ApiError(HttpStatus.INTERNAL_SERVER_ERROR.value(), message);
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(body);
     }
 }

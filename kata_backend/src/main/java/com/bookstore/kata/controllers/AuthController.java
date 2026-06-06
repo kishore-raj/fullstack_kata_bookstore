@@ -5,14 +5,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bookstore.kata.dto.AuthTokenResponse;
 import com.bookstore.kata.dto.LoginRequest;
 import com.bookstore.kata.dto.RegisterRequest;
 import com.bookstore.kata.dto.UserResponse;
+import com.bookstore.kata.security.SessionConstants;
 import com.bookstore.kata.services.AuthService;
 
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
 @RestController
@@ -31,9 +33,17 @@ public class AuthController {
         return ResponseEntity.status(HttpStatus.CREATED).body(body);
     }
 
+    
     @PostMapping("/login")
-    public AuthTokenResponse login(@Valid @RequestBody LoginRequest request) {
-        String token = authService.login(request.username(), request.password());
-        return new AuthTokenResponse(token, "Bearer");
+    public UserResponse login(@Valid @RequestBody LoginRequest request, HttpSession session) {
+        UserResponse user = authService.login(request.username(), request.password());
+        session.setAttribute(SessionConstants.LOGGED_IN_USERNAME, user.username());
+        return user;
+    }
+
+    @PostMapping("/logout")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void logout(HttpSession session) {
+        session.invalidate();
     }
 }
