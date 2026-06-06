@@ -1,0 +1,5 @@
+package com.bookstore.kata.controllers;
+
+public class UserController {
+    
+}
