@@ -30,7 +30,12 @@ async function request(method, path, body, options = {}) {
     const msg = data && typeof data === 'object' && 'message' in data
       ? String(data.message)
       : res.statusText;
-    throw new Error(msg);
+    const err = new Error(msg);
+    err.status = res.status;
+    if (data && typeof data === 'object' && 'fieldErrors' in data) {
+      err.fieldErrors = data.fieldErrors;
+    }
+    throw err;
   }
   return data;
 }

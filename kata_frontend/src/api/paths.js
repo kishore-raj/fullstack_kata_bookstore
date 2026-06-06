@@ -19,6 +19,6 @@ export function cartItemPath(bookId) {
 }
 
 export function orderPath(orderId) {
-  return `${API_PATHS.ORDERS}/${orderId}`;
+  return `/orders/${orderId}`;
 }
 
