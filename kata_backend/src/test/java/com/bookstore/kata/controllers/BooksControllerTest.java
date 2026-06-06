@@ -22,12 +22,13 @@ public class BooksControllerTest {
 
       MvcResult result =  mockMvc.perform(MockMvcRequestBuilders.get("/books/all"))
         .andExpect(MockMvcResultMatchers.status().isOk())
+        .andExpect(MockMvcResultMatchers.jsonPath("$.length()").value(3))
+        .andExpect(MockMvcResultMatchers.jsonPath("$[0].id").exists())
+        .andExpect(MockMvcResultMatchers.jsonPath("$[0].title").exists())
+        .andExpect(MockMvcResultMatchers.jsonPath("$[0].author").exists())
+        .andExpect(MockMvcResultMatchers.jsonPath("$[0].price").exists())
         .andReturn();
-        
-        System.out.println("Testing books controller list response " + result.getResponse().getContentAsString());
-
-    
-        
+ 
         
     }
 
