@@ -1,0 +1,146 @@
+.layout {
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: 0 1rem 2rem;
+  font-size: 15px;
+}
+
+.top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 1.25rem;
+}
+
+.logo {
+  font-weight: 700;
+  text-decoration: none;
+  color: #111;
+}
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1rem;
+  align-items: center;
+}
+
+.nav a {
+  color: #0b57d0;
+}
+
+.nav-user {
+  color: #333;
+  font-size: 0.95rem;
+}
+
+.link-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: #0b57d0;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.content h1 {
+  font-size: 1.35rem;
+  margin: 0 0 0.75rem;
+}
+
+.muted {
+  color: #555;
+  font-size: 0.95rem;
+}
+
+.error {
+  color: #a40000;
+  margin: 0.5rem 0 1rem;
+}
+
+table.simple {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 0.75rem;
+}
+
+table.simple th,
+table.simple td {
+  border: 1px solid #ccc;
+  padding: 0.45rem 0.5rem;
+  text-align: left;
+  vertical-align: middle;
+}
+
+table.simple th {
+  background: #f5f5f5;
+  font-weight: 600;
+}
+
+.num {
+  text-align: right;
+}
+
+.row-actions {
+  white-space: nowrap;
+}
+
+.btn {
+  font: inherit;
+  padding: 0.25rem 0.5rem;
+  cursor: pointer;
+  border: 1px solid #888;
+  background: #fff;
+  border-radius: 2px;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.input-sm {
+  width: 3.25rem;
+  font: inherit;
+  padding: 0.2rem 0.35rem;
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: 18rem;
+}
+
+.stack label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  font-size: 0.9rem;
+}
+
+.stack input {
+  font: inherit;
+  padding: 0.35rem 0.4rem;
+}
+
+.order-list {
+  list-style: none;
+  padding: 0;
+  margin: 0.75rem 0 0;
+}
+
+.order-card {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #ddd;
+}
+
+.order-card:last-child {
+  border-bottom: none;
+}
